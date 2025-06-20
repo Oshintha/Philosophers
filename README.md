@@ -4,6 +4,7 @@
 Represents a single philosopher:
 
 t_philosopher structure
+```
 typedef struct s_philosopher {
 	pthread_t		thread;          // The thread representing the philosopher.
 	int				id;              // Unique ID of the philosopher (e.g., 0, 1, 2...).
@@ -13,10 +14,11 @@ typedef struct s_philosopher {
 	pthread_mutex_t	*right_fork;     // Pointer to the mutex representing the right fork.
 	t_simulation	*sim;            // Pointer to the shared simulation struct.
 } t_philosopher;
+```
 
 t_simulation structure
 Represents the entire simulation setup:
-
+```
 typedef struct s_simulation {
 	size_t			philo_count;       // Total number of philosophers.
 	size_t			time_to_die_ms;    // Time (in ms) a philosopher can live without eating.
@@ -30,3 +32,4 @@ typedef struct s_simulation {
 	int				simulation_over;   // Flag to indicate if the simulation is done.
 	size_t			start_time;        // Timestamp (ms) when the simulation started.
 } t_simulation;
+```
