@@ -6,7 +6,7 @@
 /*   By: aoshinth <aoshinth@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:34:37 by aoshinth          #+#    #+#             */
-/*   Updated: 2025/05/24 09:34:37 by aoshinth         ###   ########.fr       */
+/*   Updated: 2025/06/20 07:35:04 by aoshinth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,5 @@ int		should_simulation_stop(t_philosopher *philo);
 int		print_status(t_philosopher *philo, const char *message);
 size_t	get_timestamp_ms(void);
 int		custom_usleep(size_t ms, t_simulation *sim);
-
-// Cleanup
-void	cleanup_and_exit(t_simulation *sim, const char *error_msg);
 
 #endif
