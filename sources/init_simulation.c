@@ -6,7 +6,7 @@
 /*   By: aoshinth <aoshinth@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 21:57:16 by aoshinth          #+#    #+#             */
-/*   Updated: 2025/05/24 21:57:16 by aoshinth         ###   ########.fr       */
+/*   Updated: 2025/06/25 13:58:20 by aoshinth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,15 @@ void	initialize_philosophers(t_simulation *sim)
 
 	while (i < sim->philo_count)
 	{
-		sim->philosophers[i].id = i + 1;
-		sim->philosophers[i].meals_eaten = 0;
-		sim->philosophers[i].sim = sim;
-		sim->philosophers[i].left_fork = &sim->forks[i];
-		sim->philosophers[i].right_fork = &sim->forks[(i + 1) % sim->philo_count];
-		sim->philosophers[i++].last_meal_time = sim->start_time;
+		t_philosopher *philo = &sim->philosophers[i];
+		
+        philo->id = i + 1;
+        philo->meals_eaten = 0;
+        philo->sim = sim;
+        philo->left_fork = &sim->forks[i];
+        philo->right_fork = &sim->forks[(i + 1) % sim->philo_count];
+        philo->last_meal_time = sim->start_time;
+        i++;
 	}
 }
 
