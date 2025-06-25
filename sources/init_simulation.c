@@ -6,7 +6,7 @@
 /*   By: aoshinth <aoshinth@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 21:57:16 by aoshinth          #+#    #+#             */
-/*   Updated: 2025/06/25 13:58:20 by aoshinth         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:43:36 by aoshinth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ void	initialize_philosophers(t_simulation *sim)
         philo->id = i + 1;
         philo->meals_eaten = 0;
         philo->sim = sim;
-        philo->left_fork = &sim->forks[i];
-        philo->right_fork = &sim->forks[(i + 1) % sim->philo_count];
+        // philo->left_fork = &sim->forks[i];
+        //philo->right_fork = &sim->forks[(i + 1) % sim->philo_count];
+		    sim->philosophers[i].left_fork_index = i;
+            sim->philosophers[i].right_fork_index = (i + 1) % sim->philo_count;
         philo->last_meal_time = sim->start_time;
         i++;
 	}

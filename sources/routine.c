@@ -6,7 +6,7 @@
 /*   By: aoshinth <aoshinth@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 20:39:47 by aoshinth          #+#    #+#             */
-/*   Updated: 2025/05/26 20:39:47 by aoshinth         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:45:01 by aoshinth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	grab_forks(t_philosopher *philo)
 {
 	if (should_simulation_stop(philo))
 		return (0);
-	pthread_mutex_lock(philo->left_fork);
+/* 	pthread_mutex_lock(philo->left_fork);
 	if (!print_status(philo, "has taken a fork"))
 		return (pthread_mutex_unlock(philo->left_fork), 0);
 	if (should_simulation_stop(philo) || philo->sim->philo_count == 1)
@@ -24,7 +24,16 @@ int	grab_forks(t_philosopher *philo)
 	pthread_mutex_lock(philo->right_fork);
 	if (!print_status(philo, "has taken a fork"))
 		return (pthread_mutex_unlock(philo->left_fork),
-				pthread_mutex_unlock(philo->right_fork), 0);
+				pthread_mutex_unlock(philo->right_fork), 0); */
+	pthread_mutex_lock(&philo->sim->forks[philo->left_fork_index]);
+       if (!print_status(philo, "has taken a fork"))
+               return (pthread_mutex_unlock(&philo->sim->forks[philo->left_fork_index]), 0);
+       if (should_simulation_stop(philo) || philo->sim->philo_count == 1)
+               return (pthread_mutex_unlock(&philo->sim->forks[philo->left_fork_index]), 0);
+    pthread_mutex_lock(&philo->sim->forks[philo->right_fork_index]);
+       if (!print_status(philo, "has taken a fork"))
+               return (pthread_mutex_unlock(&philo->sim->forks[philo->left_fork_index]),
+    pthread_mutex_unlock(&philo->sim->forks[philo->right_fork_index]), 0);	
 	return (1);
 }
 
@@ -44,8 +53,10 @@ void	eat(t_philosopher *philo)
 		philo->sim->satisfied_philos++;
 	pthread_mutex_unlock(&philo->sim->print_lock);
 
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
+	//pthread_mutex_unlock(philo->left_fork);
+	//pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(&philo->sim->forks[philo->left_fork_index]);
+    pthread_mutex_unlock(&philo->sim->forks[philo->right_fork_index]);
 }
 
 int	sleep_and_think(t_philosopher *philo)

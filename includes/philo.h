@@ -6,7 +6,7 @@
 /*   By: aoshinth <aoshinth@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:34:37 by aoshinth          #+#    #+#             */
-/*   Updated: 2025/06/25 13:59:08 by aoshinth         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:42:53 by aoshinth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@
 
 typedef struct s_simulation	t_simulation;
 
-typedef struct s_philosopher
-{
-	pthread_t		thread;
-	int				id;
-	size_t			meals_eaten;
-	size_t			last_meal_time;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
-	t_simulation	*sim;
-}	t_philosopher;
+typedef struct s_philosopher {
+	pthread_t		thread;          // The thread representing the philosopher.
+	int				id;              // Unique ID of the philosopher (e.g., 0, 1, 2...).
+	size_t			meals_eaten;     // Number of times this philosopher has eaten.
+	size_t			last_meal_time;  // Time (in ms) when the philosopher last started eating.
+	//pthread_mutex_t	*left_fork;      // Pointer to the mutex representing the left fork.
+	//pthread_mutex_t	*right_fork;     // Pointer to the mutex representing the right fork.
+	size_t		left_fork_index;      // Index of the left fork in the mutex array.
+	size_t		right_fork_index;     // Index of the right fork in the mutex array.
+	t_simulation	*sim;            // Pointer to the shared simulation struct.
+} t_philosopher;
 
 typedef struct s_simulation
 {
