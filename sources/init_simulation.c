@@ -6,7 +6,7 @@
 /*   By: aoshinth <aoshinth@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 21:57:16 by aoshinth          #+#    #+#             */
-/*   Updated: 2025/06/25 14:43:36 by aoshinth         ###   ########.fr       */
+/*   Updated: 2025/06/30 13:33:16 by aoshinth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int	allocate_simulation_resources(t_simulation *sim)
 
 void	initialize_mutexes(t_simulation *sim)
 {
-	size_t	i = 0;
+	size_t	i;
 
+	i = 0;
 	while (i < sim->philo_count)
 		pthread_mutex_init(&sim->forks[i++], NULL);
 	pthread_mutex_init(&sim->print_lock, NULL);
@@ -37,21 +38,18 @@ void	initialize_mutexes(t_simulation *sim)
 
 void	initialize_philosophers(t_simulation *sim)
 {
-	size_t	i = 0;
+	size_t	i;
 
+	i = 0;
 	while (i < sim->philo_count)
 	{
-		t_philosopher *philo = &sim->philosophers[i];
-		
-        philo->id = i + 1;
-        philo->meals_eaten = 0;
-        philo->sim = sim;
-        // philo->left_fork = &sim->forks[i];
-        //philo->right_fork = &sim->forks[(i + 1) % sim->philo_count];
-		    sim->philosophers[i].left_fork_index = i;
-            sim->philosophers[i].right_fork_index = (i + 1) % sim->philo_count;
-        philo->last_meal_time = sim->start_time;
-        i++;
+		sim->philosophers[i].id = i + 1;
+		sim->philosophers[i].meals_eaten = 0;
+		sim->philosophers[i].sim = sim;
+		sim->philosophers[i].left_fork_index = i;
+		sim->philosophers[i].right_fork_index = (i + 1) % sim->philo_count;
+		sim->philosophers[i].last_meal_time = sim->start_time;
+		i++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: aoshinth <aoshinth@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 22:09:17 by aoshinth          #+#    #+#             */
-/*   Updated: 2025/05/24 22:09:17 by aoshinth         ###   ########.fr       */
+/*   Updated: 2025/06/30 13:47:05 by aoshinth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int	join_philosopher_thread(t_simulation *sim, size_t i)
 
 int	start_philosophers(t_simulation *sim)
 {
-	size_t	i = 0;
+	size_t	i;
 
+	i = 0;
 	while (i < sim->philo_count)
 	{
 		if (create_philosopher_thread(sim, i++))
@@ -41,8 +42,9 @@ int	start_philosophers(t_simulation *sim)
 
 int	join_philosophers(t_simulation *sim)
 {
-	size_t	i = 0;
+	size_t	i;
 
+	i = 0;
 	while (i < sim->philo_count)
 	{
 		if (join_philosopher_thread(sim, i++))

@@ -6,7 +6,7 @@
 /*   By: aoshinth <aoshinth@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 20:40:34 by aoshinth          #+#    #+#             */
-/*   Updated: 2025/05/26 20:40:34 by aoshinth         ###   ########.fr       */
+/*   Updated: 2025/06/30 13:48:48 by aoshinth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ size_t	get_timestamp_ms(void)
 int	custom_usleep(size_t ms, t_simulation *sim)
 {
 	size_t	start_time;
-	size_t	i = 0;
+	size_t	i;
 
+	i = 0;
 	start_time = get_timestamp_ms();
 	while ((get_timestamp_ms() - start_time) < ms)
 	{
@@ -32,7 +33,10 @@ int	custom_usleep(size_t ms, t_simulation *sim)
 		{
 			pthread_mutex_lock(&sim->print_lock);
 			if (sim->simulation_over)
-				return (pthread_mutex_unlock(&sim->print_lock), 0);
+			{
+				pthread_mutex_unlock(&sim->print_lock);
+				return (0);
+			}
 			pthread_mutex_unlock(&sim->print_lock);
 		}
 		usleep(500);
