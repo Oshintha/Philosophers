@@ -6,7 +6,7 @@
 /*   By: aoshinth <aoshinth@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:34:37 by aoshinth          #+#    #+#             */
-/*   Updated: 2025/06/30 11:36:15 by aoshinth         ###   ########.fr       */
+/*   Updated: 2025/06/30 11:38:53 by aoshinth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,15 @@ typedef struct s_simulation
 }	t_simulation;
 
 int		validate_args(int argc, char **argv, t_simulation *sim);
-
 int		init_simulation(t_simulation *sim);
-
 void	*philosopher_routine(void *arg);
-
 int		start_philosophers(t_simulation *sim);
 int		join_philosophers(t_simulation *sim);
 void	stop_philosophers(t_simulation *sim);
 int		should_simulation_stop(t_philosopher *philo);
-
 int		print_status(t_philosopher *philo, const char *message);
 size_t	get_timestamp_ms(void);
 int		custom_usleep(size_t ms, t_simulation *sim);
-
 void	cleanup_and_exit(t_simulation *sim, const char *error_msg);
 
 #endif
